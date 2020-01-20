@@ -1,7 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from 'antd';
+import { Button, Spin } from 'antd';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { uniqueId } from 'lodash';
 import { ArticleWrapper } from './styledComponents';
 import * as actions from '../actions';
 import Article from './Article';
@@ -19,12 +21,8 @@ const actionCreators = {
   getArticles: actions.askArticlesFromServer,
 };
 
-class mainPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
+class MainPage extends React.Component {
+  // eslint-disable-next-line react/static-property-placement
   static defaultProps = {
     page: 1,
   };
@@ -86,13 +84,18 @@ class mainPage extends React.Component {
           history api
           */}
           <div>
-            <button onClick={this.hanglePrevClick}>Prev</button>
+            <Button type="primary" onClick={this.hanglePrevClick}>
+              Prev
+            </Button>
             <span>{page}</span>
-            <button onClick={this.hangleNextClick}>Next</button>
+            <Button type="primary" onClick={this.hangleNextClick}>
+              Next
+            </Button>
           </div>
-
+          {!articles.length > 0 && <Spin />}
           {articles.map(article => (
             <ArticleWrapper
+              key={uniqueId()}
               onClick={() => {
                 this.handleClick(article);
               }}
@@ -110,4 +113,19 @@ class mainPage extends React.Component {
   }
 }
 
-export default withRouter(connect(mapStateToProps, actionCreators)(mainPage));
+MainPage.propTypes = {
+  page: PropTypes.number,
+  getArticles: PropTypes.func.isRequired,
+  logOut: PropTypes.func.isRequired,
+  articles: PropTypes.arrayOf(PropTypes.object).isRequired,
+  history: PropTypes.shape({
+    replace: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    token: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default withRouter(connect(mapStateToProps, actionCreators)(MainPage));

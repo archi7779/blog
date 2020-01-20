@@ -2,15 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Redirect } from 'react-router';
+import PropTypes from 'prop-types';
 import Login from './components/Login';
 import Registration from './components/Registration';
 import MainPage from './components/MainPage';
-import CreateNewArticle from './components/CreateNewArticle'
-import OpenedArticle from './components/OpenedArticle'
-import EditArticle from "./components/EditArticle";
+import CreateNewArticle from './components/CreateNewArticle';
+import OpenedArticle from './components/OpenedArticle';
+import EditArticle from './components/EditArticle';
 import Nav from './components/Nav';
-
-
 import 'antd/dist/antd.css';
 
 const mapStateToProps = state => {
@@ -39,13 +38,20 @@ function App({ user }) {
           {!Object.keys(user).length > 0 ? <Redirect to="/login" /> : <CreateNewArticle />}
         </Route>
         <Route exact path="/articles/:id">
-          {!Object.keys(user).length > 0 ? <Redirect to="/login" /> :  <OpenedArticle />}
+          {!Object.keys(user).length > 0 ? <Redirect to="/login" /> : <OpenedArticle />}
         </Route>
         <Route exact path="/articles/:id/edit">
-          {!Object.keys(user).length > 0 ? <Redirect to="/login" /> :  <EditArticle />}
+          {!Object.keys(user).length > 0 ? <Redirect to="/login" /> : <EditArticle />}
         </Route>
       </div>
     </Router>
   );
 }
+
+App.propTypes = {
+  user: PropTypes.shape({
+    token: PropTypes.string,
+    username: PropTypes.string,
+  }).isRequired,
+};
 export default connect(mapStateToProps)(App);

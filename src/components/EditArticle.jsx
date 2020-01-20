@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Field, Form, FieldArray } from 'formik';
 import { Input, Button } from 'antd';
-import { compact, uniqueId } from 'lodash';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { uniqueId } from 'lodash';
+import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../actions';
 
@@ -61,7 +62,7 @@ class EditArticle extends React.Component {
               headers: { Authorization: `Token ${token}` },
             };
             try {
-             const article = data;
+              const article = data;
               const response = await axios.put(
                 `https://conduit.productionready.io/api/articles/${state.slug}`,
                 { article },
@@ -73,14 +74,16 @@ class EditArticle extends React.Component {
                 state: response.data.article,
               });
             } catch (error) {
+              // eslint-disable-next-line no-console
               console.log(error);
+              throw error;
             }
           };
           sendDataToServer();
           setSubmitting(false);
         }}
       >
-        {({ values, errors, isSubmitting, handleSubmit, touched }) => (
+        {({ values, errors, isSubmitting, touched }) => (
           <>
             <Form>
               <div>title</div>
@@ -110,16 +113,16 @@ class EditArticle extends React.Component {
                       key={0}
                     />
                     {values.tagList.slice(1).map((item, index) => (
-                      <>
+                      <div key={uniqueId()}>
                         <div>tag</div>
                         <Field
                           name={`tagList[${index + 1}]`}
                           type="input"
                           as={Input}
                           placeholder="enter hashTag"
-                          key={index}
+                          key={`${values.tagList.length}${item}`}
                         />
-                      </>
+                      </div>
                     ))}
                     <Button
                       type="primary"
@@ -142,5 +145,27 @@ class EditArticle extends React.Component {
     );
   }
 }
-
+EditArticle.propTypes = {
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      slug: PropTypes.string.isRequired,
+      author: PropTypes.object.isRequired,
+      createdAt: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
+      favorited: PropTypes.bool.isRequired,
+      favoritesCount: PropTypes.number.isRequired,
+      tagList: PropTypes.array.isRequired,
+      body: PropTypes.string.isRequired,
+    }).isRequired,
+  }).isRequired,
+  history: PropTypes.shape({
+    replace: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    token: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+  }).isRequired,
+};
 export default withRouter(connect(mapStateToProps, actionCreators)(EditArticle));

@@ -3,6 +3,7 @@ import { Formik, Field, Form } from 'formik';
 import { Button, Input } from 'antd';
 import { connect } from 'react-redux';
 import * as yup from 'yup';
+import PropTypes from 'prop-types';
 import * as actions from '../actions';
 
 const mapStateToProps = state => {
@@ -82,7 +83,7 @@ class Registration extends React.Component {
               {errors.email && <div>{errors.email}</div>}
               <Field
                 name="password"
-                type="input"
+                type="password"
                 as={Input}
                 placeholder="enter ur password"
                 disabled={registrationStatus === 'requested'}
@@ -105,5 +106,11 @@ class Registration extends React.Component {
     );
   }
 }
+
+Registration.propTypes = {
+  doRegistration: PropTypes.func.isRequired,
+  registrationStatus: PropTypes.string.isRequired,
+  netError: PropTypes.objectOf(PropTypes.string).isRequired,
+};
 
 export default connect(mapStateToProps, actionCreators)(Registration);

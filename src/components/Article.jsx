@@ -1,11 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { formatDistanceToNow } from 'date-fns';
+import { Icon } from 'antd';
+import PropTypes from 'prop-types';
+import { uniqueId } from 'lodash';
 import { StyledCard } from './styledComponents';
 import * as actions from '../actions';
-import { Icon } from 'antd';
 
-const mapStateToProps = state => {
+const mapStateToProps = () => {
   const props = {};
   return props;
 };
@@ -34,17 +36,15 @@ class Article extends React.Component {
     return (
       <StyledCard size="small" title={title} extra={<span>created {formedDate}</span>}>
         <div className="ArticleMainSection">
-          <p>
-            author: <a>{author.username}</a>
-          </p>
+          <p>author: {author.username}</p>
           <p>{body}</p>
         </div>
+        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */}
         <div className="ArticleLikeSection" onClick={this.handleClick(slug, token, favorited)}>
           {favorited ? (
             <label htmlFor="imgTest">
               {' '}
               <Icon type="heart" theme="filled" />
-
               {favoritesCount}
             </label>
           ) : (
@@ -58,11 +58,27 @@ class Article extends React.Component {
 
         <div className="ArticleTagsSection">
           {tagList.map(item => (
-            <a href="#"> #{item}</a>
+            <span key={uniqueId()}> #{item}</span>
           ))}
         </div>
       </StyledCard>
     );
   }
 }
+
+Article.propTypes = {
+  handleLike: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
+  article: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    favorited: PropTypes.bool.isRequired,
+    favoritesCount: PropTypes.number.isRequired,
+    tagList: PropTypes.array.isRequired,
+    slug: PropTypes.string.isRequired,
+    body: PropTypes.string.isRequired,
+    author: PropTypes.object.isRequired,
+  }).isRequired,
+};
+
 export default connect(mapStateToProps, actionCreators)(Article);

@@ -13,9 +13,9 @@ function Nav() {
       <li>
         <Link to="/">MainPage</Link>
       </li>
-        <li>
-            <Link to="/add">Add Post</Link>
-        </li>
+      <li>
+        <Link to="/add">Add Post</Link>
+      </li>
     </ul>
   );
 }

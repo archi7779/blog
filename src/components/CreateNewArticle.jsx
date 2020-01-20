@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Formik, Field, Form, FieldArray } from 'formik';
 import { Input, Button } from 'antd';
-import { compact, uniqueId } from 'lodash';
+import { compact } from 'lodash';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import * as actions from '../actions';
 
 const ValidationSchema = Yup.object().shape({
@@ -73,6 +74,7 @@ class CreateNewArticle extends React.Component {
                 state: response.data.article,
               });
             } catch (error) {
+              // eslint-disable-next-line no-console
               console.log(error);
             }
           };
@@ -80,7 +82,7 @@ class CreateNewArticle extends React.Component {
           setSubmitting(false);
         }}
       >
-        {({ values, errors, isSubmitting, handleSubmit, touched }) => (
+        {({ values, errors, isSubmitting, touched }) => (
           <>
             <Form className="loginForm">
               <Field name="title" type="input" as={Input} placeholder="enter article's title" />
@@ -112,7 +114,7 @@ class CreateNewArticle extends React.Component {
                         type="input"
                         as={Input}
                         placeholder="enter hashTag"
-                        key={index}
+                        key={`${values.tagList.length}${item}`}
                       />
                     ))}
                     <Button
@@ -136,5 +138,16 @@ class CreateNewArticle extends React.Component {
     );
   }
 }
+
+CreateNewArticle.propTypes = {
+  history: PropTypes.shape({
+    replace: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    token: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+  }).isRequired,
+};
 
 export default withRouter(connect(mapStateToProps, actionCreators)(CreateNewArticle));

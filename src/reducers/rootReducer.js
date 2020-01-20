@@ -2,8 +2,6 @@ import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
 import { findIndex } from 'lodash';
 import * as actions from '../actions';
-import { getArticlesFromServer } from '../actions';
-
 // нативно не смогу подключить ридукс
 
 const loginState = handleActions(
@@ -39,7 +37,6 @@ const registrationState = handleActions(
 const user = handleActions(
   {
     [actions.userInfoFromServer](state, { payload }) {
-      console.log(payload.user);
       return {
         ...payload.user,
       };
@@ -60,7 +57,8 @@ const articles = handleActions(
     },
     [actions.updateLikeStatus](state, { payload: { article } }) {
       const numOFArticleInState = findIndex(state, post => post.slug === article.slug);
-      //тут все нормально в такой записи?
+      // тут все нормально в такой записи?
+      // eslint-disable-next-line no-param-reassign
       state[numOFArticleInState] = article;
       return [...state];
     },

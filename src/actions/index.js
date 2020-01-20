@@ -65,6 +65,7 @@ export const askArticlesFromServer = ([token, page]) => async dispatch => {
     dispatch(getArticlesFromServer(articles));
   } catch (error) {
     // обработать бы
+    // eslint-disable-next-line no-console
     console.log(error);
   }
 };
@@ -82,10 +83,11 @@ export const likePost = (slug, token, currentLikeStatus) => async dispatch => {
         '',
         config
       );
-      const article = response.data
+      const article = response.data;
       dispatch(updateLikeStatus(article));
     } catch (error) {
       // обработать бы
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   } else {
@@ -94,10 +96,11 @@ export const likePost = (slug, token, currentLikeStatus) => async dispatch => {
         `https://conduit.productionready.io/api/articles/${slug}/favorite`,
         config
       );
-      const article = response.data
+      const article = response.data;
       dispatch(updateLikeStatus(article));
     } catch (error) {
       // обработать бы
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   }
