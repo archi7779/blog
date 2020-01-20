@@ -1,45 +1,109 @@
-import React  from "react";
+import React from 'react';
 import { Formik, Field, Form } from 'formik';
-import { Input } from 'antd'
+import { Button, Input } from 'antd';
+import { connect } from 'react-redux';
+import * as yup from 'yup';
+import * as actions from '../actions';
 
+const mapStateToProps = state => {
+  const props = {
+    user: state.user,
+    registrationStatus: state.registrationState,
+    netError: state.netError,
+  };
+  return props;
+};
 
-export default class Login extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
+const actionCreators = {
+  doRegistration: actions.registrWithUserData,
+};
+const validationSchema = yup.object({
+  username: yup
+    .string()
+    .required()
+    .max(50),
+  email: yup
+    .string()
+    .email()
+    .required('Please Enter your Email'),
+  password: yup.string().required('Please Enter your password'),
+  // .matches(
+  //     "^(?=.*[A-Za-z])(?=.*d)(?=.*[@$!%*#?&])[A-Za-zd@$!%*#?&]{8,}$",
+  //     "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character"
+  // )
+});
 
-    render () {
-        return(
-            <Formik
-                validateOnChange={true}
-                initialValues={{
-                    name: '',
-                    password: '',
-                    repeatPassword: '',
-                    email: '',
-                    website: '',
-                    age: undefined,
-                    skills: [],
-                    acceptTerms: false,
-                }}
-                // validationSchema={validationSchema}
-                onSubmit={(data, {setSubmitting})=>{
-                    setSubmitting(true);
-                    const sendDataToServer = async () => {
-                        console.log('ejej')
-                    };
-                    sendDataToServer();
-                    setSubmitting(false);
-                }}>
-                {({values, errors, isSubmitting, handleSubmit, touched})=>(
-                    <>
-                        <Form className='loginForm'>
-                            <div>Registation</div>
-                        </Form>
-                    </>
-                )}
-            </Formik>
-        );
-    }
+class Registration extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  render() {
+    const { doRegistration, registrationStatus, netError } = this.props;
+    return (
+      <Formik
+        validateOnChange
+        initialValues={{
+          username: '',
+          email: '',
+          password: '',
+        }}
+        validationSchema={validationSchema}
+        onSubmit={(data, { setSubmitting }) => {
+          setSubmitting(true);
+          doRegistration(data);
+          setSubmitting(false);
+        }}
+      >
+        {({ errors }) => (
+          <>
+            <Form className="loginForm">
+              <Field
+                name="username"
+                type="input"
+                as={Input}
+                placeholder="enter ur login"
+                disabled={registrationStatus === 'requested'}
+                className={errors.username || netError.username ? 'error' : ''}
+              />
+
+              {netError.username && <div>{netError.username}</div>}
+              {errors.username && <div>{errors.username}</div>}
+              <Field
+                name="email"
+                type="input"
+                as={Input}
+                placeholder="enter ur email"
+                disabled={registrationStatus === 'requested'}
+                className={errors.email || netError.email ? 'error' : ''}
+              />
+              {netError.email && <div>{netError.email}</div>}
+              {errors.email && <div>{errors.email}</div>}
+              <Field
+                name="password"
+                type="input"
+                as={Input}
+                placeholder="enter ur password"
+                disabled={registrationStatus === 'requested'}
+                className={errors.password || netError.password ? 'error' : ''}
+              />
+              {netError.password && netError.password.map(item => <div>{item}</div>)}
+              {errors.password && <div>{errors.password}</div>}
+              <Button
+                type="primary"
+                htmlType="submit"
+                disabled={registrationStatus === 'requested'}
+                className="subBut"
+              >
+                Submit
+              </Button>
+            </Form>
+          </>
+        )}
+      </Formik>
+    );
+  }
 }
+
+export default connect(mapStateToProps, actionCreators)(Registration);
