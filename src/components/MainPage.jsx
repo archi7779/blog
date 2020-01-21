@@ -84,12 +84,15 @@ class MainPage extends React.Component {
           history api
           */}
           <div>
-            <Button type="primary" onClick={this.hanglePrevClick}>
+            <Button type="primary" onClick={this.hanglePrevClick} className='MainPage-Prev-Button'>
               Prev
             </Button>
             <span>{page}</span>
-            <Button type="primary" onClick={this.hangleNextClick}>
+            <Button type="primary" onClick={this.hangleNextClick} className='MainPage-Next-Button'>
               Next
+            </Button>
+            <Button type="primary" onClick={this.handleLogOut} className="logOut">
+              LogOut
             </Button>
           </div>
           {!articles.length > 0 && <Spin />}
@@ -103,10 +106,6 @@ class MainPage extends React.Component {
               <Article article={article} token={user.token} />
             </ArticleWrapper>
           ))}
-
-          <Button type="primary" onClick={this.handleLogOut} className="logOut">
-            LogOut
-          </Button>
         </div>
       </>
     );

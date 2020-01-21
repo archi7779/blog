@@ -3,22 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="34b17857-2c07-49ee-afe3-13bc9a6afd6d" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/like.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/likeGrey.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Article.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Article.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/CreateNewArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CreateNewArticle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditArticle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Login.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/MainPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Nav.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Nav.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/OpenedArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OpenedArticle.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Registration.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Registration.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/rootReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/index.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.sass" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +87,8 @@
       <workItem from="1579095895556" duration="32302000" />
       <workItem from="1579260600361" duration="1179000" />
       <workItem from="1579393620518" duration="20351000" />
-      <workItem from="1579454190961" duration="12460000" />
+      <workItem from="1579454190961" duration="14513000" />
+      <workItem from="1579595260872" duration="547000" />
     </task>
     <servers />
   </component>

@@ -22,7 +22,7 @@ const mapStateToProps = state => {
 // я все время при установки зависимостей пишу --save это норм, или надо все же разделять dev dep от обычных
 function App({ user }) {
   return (
-    <Router>
+    <Router basename="/blog/">
       <div className="App">
         <Nav />
         <Route exact path="/login">

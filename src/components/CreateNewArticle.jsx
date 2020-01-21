@@ -122,14 +122,21 @@ class CreateNewArticle extends React.Component {
                       htmlType="button"
                       disabled={isSubmitting}
                       onClick={() => values.tagList[0] && arrayHelpers.push()}
+                      className="CreateNewArticle-addNewArticle-Button"
+
                     >
                       add another hashTag
                     </Button>
                   </>
                 )}
               </FieldArray>
-              <Button type="primary" htmlType="submit" disabled={isSubmitting}>
-                sub
+              <Button
+                type="primary"
+                htmlType="submit"
+                disabled={isSubmitting}
+                className="CreateNewArticle-Submit-Button"
+              >
+                Submit
               </Button>
             </Form>
           </>
