@@ -37,7 +37,7 @@ class Article extends React.Component {
       <StyledCard size="small" title={title} extra={<span>created {formedDate}</span>}>
         <div className="ArticleMainSection">
           <p>author: {author.username}</p>
-          <p>{body}</p>
+          <p className="Article-Body">{body}</p>
         </div>
         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */}
         <div className="ArticleLikeSection" onClick={this.handleClick(slug, token, favorited)}>
