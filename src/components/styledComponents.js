@@ -23,5 +23,5 @@ export const HeartImg = styled.img`
 `;
 
 export const StyledCard = styled(Card)`
-  width: 100%;
+  width: 500px;
 `;

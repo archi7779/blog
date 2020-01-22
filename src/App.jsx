@@ -8,7 +8,6 @@ import Registration from './components/Registration';
 import MainPage from './components/MainPage';
 import CreateNewArticle from './components/CreateNewArticle';
 import OpenedArticle from './components/OpenedArticle';
-import EditArticle from './components/EditArticle';
 import getCookie from './components/functions/cookieFunc';
 import Nav from './components/Nav';
 import 'antd/dist/antd.css';
@@ -47,7 +46,11 @@ function App({ user }) {
           {Object.keys(user).length > 0 || authToken ? <OpenedArticle /> : <Redirect to="/login" />}
         </Route>
         <Route exact path="/articles/:id/edit">
-          {Object.keys(user).length > 0 || authToken ? <EditArticle /> : <Redirect to="/login" />}
+          {Object.keys(user).length > 0 || authToken ? (
+            <CreateNewArticle />
+          ) : (
+            <Redirect to="/login" />
+          )}
         </Route>
       </div>
     </Router>

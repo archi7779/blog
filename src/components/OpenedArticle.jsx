@@ -65,6 +65,11 @@ class OpenedArticle extends React.Component {
     return (
       <StyledCard size="small" title={state.title} extra={<span>created {formedDate}</span>}>
         <div className="ArticleMainSection">
+          <img
+            src={state.author.image}
+            alt="userPhoto"
+            className="ArticleMainSection-useProfile-Img"
+          />
           <p>author:{state.author.username}</p>
           <p>{state.body}</p>
         </div>

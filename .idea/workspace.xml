@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="34b17857-2c07-49ee-afe3-13bc9a6afd6d" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/functions/cookieFunc.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Article.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Article.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MainPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainPage.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/rootReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/index.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.sass" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CreateNewArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CreateNewArticle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/EditArticle.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/OpenedArticle.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/OpenedArticle.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/styledComponents.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/styledComponents.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +90,7 @@
       <workItem from="1579393620518" duration="20351000" />
       <workItem from="1579454190961" duration="14513000" />
       <workItem from="1579595260872" duration="3259000" />
-      <workItem from="1579688944149" duration="8096000" />
+      <workItem from="1579688944149" duration="11539000" />
     </task>
     <servers />
   </component>
@@ -108,10 +106,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="735" y="310" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579694707889" />
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1578166766332">
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1579701941914">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578166766332" />
+    <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1579701941914" />
     <state x="596" y="293" key="EditFileWatcherDialog" timestamp="1578462338229">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

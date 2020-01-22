@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Formik, Field, Form, FieldArray } from 'formik';
+import { Formik, Form, FieldArray, useField } from 'formik';
 import { Input, Button } from 'antd';
 import { compact } from 'lodash';
 import * as Yup from 'yup';
@@ -8,6 +8,16 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import * as actions from '../actions';
+
+function MyInput(props) {
+  const [field, meta] = useField(props);
+  return (
+    <>
+      <Input {...field} {...props} />
+      {meta.error && meta.touched && <div>{meta.error}</div>}
+    </>
+  );
+}
 
 const ValidationSchema = Yup.object().shape({
   title: Yup.string()
@@ -34,6 +44,11 @@ const actionCreators = {
 };
 
 class CreateNewArticle extends React.Component {
+  // eslint-disable-next-line react/static-property-placement
+  static defaultProps = {
+    location: null,
+  };
+
   constructor(props) {
     super(props);
     this.state = {};
@@ -42,15 +57,16 @@ class CreateNewArticle extends React.Component {
   render() {
     const {
       user: { token },
+      location: { state },
     } = this.props;
     return (
       <Formik
         validateOnChange
         initialValues={{
-          title: '',
-          description: '',
-          body: '',
-          tagList: [],
+          title: state ? state.title : '',
+          description: state ? state.description : '',
+          body: state ? state.body : '',
+          tagList: state ? state.tagList : [],
         }}
         validationSchema={ValidationSchema}
         onSubmit={(data, { setSubmitting }) => {
@@ -82,39 +98,22 @@ class CreateNewArticle extends React.Component {
           setSubmitting(false);
         }}
       >
-        {({ values, errors, isSubmitting, touched }) => (
+        {({ values, isSubmitting }) => (
           <>
             <Form className="loginForm">
-              <Field name="title" type="input" as={Input} placeholder="enter article's title" />
-              {errors.title && touched.title ? <div>{errors.title}</div> : null}
-
-              <Field
-                name="description"
-                type="input"
-                as={Input}
-                placeholder="enter article's description"
-              />
-              {errors.description && touched.description ? <div>{errors.description}</div> : null}
-
-              <Field name="body" type="input" as={Input} placeholder="enter article's body" />
-              {errors.body && touched.body ? <div>{errors.body}</div> : null}
+              <MyInput name="title" placeholder="enter article's title" />
+              <MyInput name="description" placeholder="enter article's description" />
+              <MyInput name="body" placeholder="enter article's body" />
               <FieldArray name="tagList">
                 {arrayHelpers => (
                   <>
-                    <Field
-                      name="tagList[0]"
-                      type="input"
-                      as={Input}
-                      placeholder="enter hashTag"
-                      key={0}
-                    />
+                    <MyInput name="tagList[0]" placeholder="enter hashTag" key={0} />
                     {values.tagList.slice(1).map((item, index) => (
-                      <Field
+                      <MyInput
                         name={`tagList[${index + 1}]`}
-                        type="input"
-                        as={Input}
                         placeholder="enter hashTag"
-                        key={`${values.tagList.length}${item}`}
+                        /* eslint-disable-next-line react/no-array-index-key */
+                        key={index}
                       />
                     ))}
                     <Button
@@ -154,6 +153,14 @@ CreateNewArticle.propTypes = {
     token: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
   }).isRequired,
+  location: PropTypes.shape({
+    state: PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      tagList: PropTypes.array.isRequired,
+      body: PropTypes.string.isRequired,
+    }),
+  }),
 };
 
 export default withRouter(connect(mapStateToProps, actionCreators)(CreateNewArticle));
