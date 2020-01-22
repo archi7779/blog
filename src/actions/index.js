@@ -38,6 +38,8 @@ export const logInWithCookieAuthToken = authToken => async dispatch => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.log(error);
+    dispatch(netErrorToState(error.response));
+    dispatch(loginStateFailure());
   }
 };
 

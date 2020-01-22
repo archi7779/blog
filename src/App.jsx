@@ -8,7 +8,7 @@ import Registration from './components/Registration';
 import MainPage from './components/MainPage';
 import CreateNewArticle from './components/CreateNewArticle';
 import OpenedArticle from './components/OpenedArticle';
-import getCookie from './components/functions/cookieFunc';
+import { getCookie } from './components/functions/cookieFunc';
 import Nav from './components/Nav';
 import 'antd/dist/antd.css';
 

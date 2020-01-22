@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 import { ArticleWrapper } from './styledComponents';
 import * as actions from '../actions';
-import getCookie from './functions/cookieFunc';
+import { getCookie, deleteCookie } from './functions/cookieFunc';
 import Article from './Article';
 
 const mapStateToProps = state => {
@@ -43,7 +43,8 @@ class MainPage extends React.Component {
   }
 
   handleLogOut = () => {
-    const { logOut } = this.props;
+    const { logOut, user:{token} } = this.props;
+    deleteCookie('authToken')
     logOut();
   };
 
