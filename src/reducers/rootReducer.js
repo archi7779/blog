@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { findIndex } from 'lodash';
 import * as actions from '../actions';
 // нативно не смогу подключить ридукс
 
@@ -56,11 +55,12 @@ const articles = handleActions(
       return [...articlesToStore];
     },
     [actions.updateLikeStatus](state, { payload: { article } }) {
-      const numOFArticleInState = findIndex(state, post => post.slug === article.slug);
       // тут все нормально в такой записи?
+      const newState = state.map(post => {
+        return post.slug === article.slug ? article : post;
+      });
       // eslint-disable-next-line no-param-reassign
-      state[numOFArticleInState] = article;
-      return [...state];
+      return [...newState];
     },
   },
   []

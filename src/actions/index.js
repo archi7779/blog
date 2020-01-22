@@ -20,9 +20,24 @@ export const logInWithEmainAndPassword = user => async dispatch => {
     });
     dispatch(loginStateSuccess());
     dispatch(userInfoFromServer(response.data));
+    document.cookie = `authToken=${response.data.user.token}; path=/; max-age=86400; secure `;
   } catch (error) {
     dispatch(netErrorToState(error.response));
     dispatch(loginStateFailure());
+  }
+};
+export const logInWithCookieAuthToken = authToken => async dispatch => {
+  dispatch(loginStateRequest());
+  try {
+    const config = {
+      headers: { Authorization: `Token ${authToken}` },
+    };
+    const response = await axios.get('https://conduit.productionready.io/api/user', config);
+    dispatch(loginStateSuccess());
+    dispatch(userInfoFromServer(response.data));
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.log(error);
   }
 };
 
@@ -35,6 +50,7 @@ export const registrWithUserData = user => async dispatch => {
     const response = await axios.post(' https://conduit.productionready.io/api/users', { user });
     dispatch(registrationStateSuccess());
     dispatch(userInfoFromServer(response.data));
+    document.cookie = `authToken=${response.data.user.token}; path=/; max-age=86400; secure;`;
     // программный редирект
   } catch (error) {
     dispatch(netErrorToState(error.response));
@@ -51,12 +67,22 @@ export const askArticlesFromServer = ([token, page]) => async dispatch => {
   } else {
     dispatch(setPage(page));
   }
-
   const limit = 10;
-  // чувствую что хочу переписать это место
   const offset = page === 1 ? '' : `offset=${(page - 1) * 10}`;
   const params = `?limit=${limit}&${offset}`;
   const url = `https://conduit.productionready.io/api/articles${params}`;
+  if (token === 'optional') {
+    try {
+      const articles = await axios.get(url);
+      dispatch(getArticlesFromServer(articles));
+      return;
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.log(error);
+      return;
+    }
+  }
+
   const config = {
     headers: { Authorization: `Token ${token}` },
   };
@@ -86,9 +112,12 @@ export const likePost = (slug, token, currentLikeStatus) => async dispatch => {
       const article = response.data;
       dispatch(updateLikeStatus(article));
     } catch (error) {
-      // обработать бы
       // eslint-disable-next-line no-console
       console.log(error);
+      if (error.response.status) {
+        // eslint-disable-next-line no-alert
+        alert('u need to login first');
+      }
     }
   } else {
     try {
@@ -99,9 +128,12 @@ export const likePost = (slug, token, currentLikeStatus) => async dispatch => {
       const article = response.data;
       dispatch(updateLikeStatus(article));
     } catch (error) {
-      // обработать бы
       // eslint-disable-next-line no-console
       console.log(error);
+      if (error.response.status) {
+        // eslint-disable-next-line no-alert
+        alert('u need to login first');
+      }
     }
   }
 };

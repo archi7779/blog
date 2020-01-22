@@ -5,6 +5,7 @@ import { Icon } from 'antd';
 import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 import { StyledCard } from './styledComponents';
+
 import * as actions from '../actions';
 
 const mapStateToProps = () => {
@@ -17,6 +18,11 @@ const actionCreators = {
 };
 
 class Article extends React.Component {
+  // eslint-disable-next-line react/static-property-placement
+  static defaultProps = {
+    token: 'optional',
+  };
+
   handleClick = (slug, token, currentLikeStatus) => event => {
     event.stopPropagation();
     const { handleLike } = this.props;
@@ -36,7 +42,8 @@ class Article extends React.Component {
     return (
       <StyledCard size="small" title={title} extra={<span>created {formedDate}</span>}>
         <div className="ArticleMainSection">
-          <p>author: {author.username}</p>
+          <span className="ArticleMainSection-useProfile-userName"> {author.username}</span>
+          <img src={author.image} alt="userPhoto" className="ArticleMainSection-useProfile-Img" />
           <p className="Article-Body">{body}</p>
         </div>
         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions,jsx-a11y/click-events-have-key-events */}
@@ -68,7 +75,7 @@ class Article extends React.Component {
 
 Article.propTypes = {
   handleLike: PropTypes.func.isRequired,
-  token: PropTypes.string.isRequired,
+  token: PropTypes.string,
   article: PropTypes.shape({
     title: PropTypes.string.isRequired,
     createdAt: PropTypes.string.isRequired,

@@ -9,9 +9,11 @@ import MainPage from './components/MainPage';
 import CreateNewArticle from './components/CreateNewArticle';
 import OpenedArticle from './components/OpenedArticle';
 import EditArticle from './components/EditArticle';
+import getCookie from './components/functions/cookieFunc';
 import Nav from './components/Nav';
 import 'antd/dist/antd.css';
 
+const authToken = getCookie('authToken');
 const mapStateToProps = state => {
   const props = {
     user: state.user,
@@ -26,22 +28,26 @@ function App({ user }) {
       <div className="App">
         <Nav />
         <Route exact path="/login">
-          {Object.keys(user).length > 0 ? <Redirect to="/" /> : <Login />}
+          {Object.keys(user).length > 0 || authToken ? <Redirect to="/" /> : <Login />}
         </Route>
         <Route exact path="/registration">
-          {Object.keys(user).length > 0 ? <Redirect to="/" /> : <Registration />}
+          {Object.keys(user).length > 0 || authToken ? <Redirect to="/" /> : <Registration />}
         </Route>
         <Route exact path="/">
-          {!Object.keys(user).length > 0 ? <Redirect to="/login" /> : <MainPage />}
+          <MainPage />
         </Route>
         <Route exact path="/add">
-          {!Object.keys(user).length > 0 ? <Redirect to="/login" /> : <CreateNewArticle />}
+          {Object.keys(user).length > 0 || authToken ? (
+            <CreateNewArticle />
+          ) : (
+            <Redirect to="/login" />
+          )}
         </Route>
         <Route exact path="/articles/:id">
-          {!Object.keys(user).length > 0 ? <Redirect to="/login" /> : <OpenedArticle />}
+          {Object.keys(user).length > 0 || authToken ? <OpenedArticle /> : <Redirect to="/login" />}
         </Route>
         <Route exact path="/articles/:id/edit">
-          {!Object.keys(user).length > 0 ? <Redirect to="/login" /> : <EditArticle />}
+          {Object.keys(user).length > 0 || authToken ? <EditArticle /> : <Redirect to="/login" />}
         </Route>
       </div>
     </Router>

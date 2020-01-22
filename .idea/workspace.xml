@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="34b17857-2c07-49ee-afe3-13bc9a6afd6d" name="Default Changelist" comment="" />
+    <list default="true" id="34b17857-2c07-49ee-afe3-13bc9a6afd6d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/functions/cookieFunc.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Article.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Article.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MainPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/rootReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/rootReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/index.sass" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/index.sass" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -82,7 +91,8 @@
       <workItem from="1579260600361" duration="1179000" />
       <workItem from="1579393620518" duration="20351000" />
       <workItem from="1579454190961" duration="14513000" />
-      <workItem from="1579595260872" duration="1319000" />
+      <workItem from="1579595260872" duration="3259000" />
+      <workItem from="1579688944149" duration="8096000" />
     </task>
     <servers />
   </component>
@@ -94,10 +104,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="179" key="#ESLint/0.0.1920.1040@0.0.1920.1040" timestamp="1579529761187" />
-    <state x="735" y="310" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579522594352">
+    <state x="735" y="310" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1579694707889">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="735" y="310" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579522594352" />
+    <state x="735" y="310" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1579694707889" />
     <state x="690" y="267" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1578166766332">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

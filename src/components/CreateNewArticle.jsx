@@ -123,7 +123,6 @@ class CreateNewArticle extends React.Component {
                       disabled={isSubmitting}
                       onClick={() => values.tagList[0] && arrayHelpers.push()}
                       className="CreateNewArticle-addNewArticle-Button"
-
                     >
                       add another hashTag
                     </Button>

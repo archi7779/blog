@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { uniqueId } from 'lodash';
 import { ArticleWrapper } from './styledComponents';
 import * as actions from '../actions';
+import getCookie from './functions/cookieFunc';
 import Article from './Article';
 
 const mapStateToProps = state => {
@@ -19,12 +20,14 @@ const mapStateToProps = state => {
 const actionCreators = {
   logOut: actions.logOut,
   getArticles: actions.askArticlesFromServer,
+  cookieLogin: actions.logInWithCookieAuthToken,
 };
 
 class MainPage extends React.Component {
   // eslint-disable-next-line react/static-property-placement
   static defaultProps = {
     page: 1,
+    authToken: getCookie('authToken') ? getCookie('authToken') : null,
   };
 
   componentDidMount() {
@@ -32,8 +35,11 @@ class MainPage extends React.Component {
       user: { token },
       page,
       getArticles,
+      authToken,
+      cookieLogin,
     } = this.props;
-    getArticles([token, page]);
+    cookieLogin(authToken);
+    getArticles([token || 'optional', page]);
   }
 
   handleLogOut = () => {
@@ -51,7 +57,7 @@ class MainPage extends React.Component {
       return;
     }
     const newPage = page - 1;
-    getArticles([token, newPage]);
+    getArticles([token || 'optional', newPage]);
   };
 
   hangleNextClick = () => {
@@ -61,7 +67,7 @@ class MainPage extends React.Component {
       getArticles,
     } = this.props;
     const newPage = page + 1;
-    getArticles([token, newPage]);
+    getArticles([token || 'optional', newPage]);
   };
 
   handleClick = article => {
@@ -78,17 +84,13 @@ class MainPage extends React.Component {
     return (
       <>
         <div className="mainPage">
-          {/*
-          создать компонент артикла
-          настроить пагинацию
-          history api
-          */}
           <div>
-            <Button type="primary" onClick={this.hanglePrevClick} className='MainPage-Prev-Button'>
+            {user.username && <div className="logInIndicator">u logged as {user.username}</div>}
+            <Button type="primary" onClick={this.hanglePrevClick} className="MainPage-Prev-Button">
               Prev
             </Button>
             <span>{page}</span>
-            <Button type="primary" onClick={this.hangleNextClick} className='MainPage-Next-Button'>
+            <Button type="primary" onClick={this.hangleNextClick} className="MainPage-Next-Button">
               Next
             </Button>
             <Button type="primary" onClick={this.handleLogOut} className="logOut">
@@ -113,6 +115,8 @@ class MainPage extends React.Component {
 }
 
 MainPage.propTypes = {
+  authToken: PropTypes.string,
+  cookieLogin: PropTypes.func.isRequired,
   page: PropTypes.number,
   getArticles: PropTypes.func.isRequired,
   logOut: PropTypes.func.isRequired,
@@ -122,8 +126,8 @@ MainPage.propTypes = {
     push: PropTypes.func.isRequired,
   }).isRequired,
   user: PropTypes.shape({
-    token: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
+    token: PropTypes.string,
+    username: PropTypes.string,
   }).isRequired,
 };
 
